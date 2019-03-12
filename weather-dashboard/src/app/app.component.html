@@ -1,0 +1,100 @@
+<div *ngIf="currentState == states.LOADING">
+	Please wait..
+</div>
+
+<div *ngIf="currentState == states.ERROR">
+	ERROR {{errorMessage | json}}
+</div>
+	
+<bs-navbar></bs-navbar>	
+<!--<bs-header></bs-header>-->
+
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3 ">
+    <div class="bg-blue mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center col-12  overflow-hidden">
+
+				<!--current state-->
+        <div class="my-3 py-3">   
+					<div class="display-5 text-white" *ngIf="currentState == states.READY">
+							<table class="d-flex justify-content-center text-left">
+									<tbody>
+										<tr >
+											<td class="px-5"><img src="../../assets/svg/wi-day-sunny.svg" width="90"></td>
+											<td>
+													<table class="d-flex justify-content-center text-left">
+															<tbody>
+																<tr >
+																	<td>{{data.station.name}}</td>
+																</tr>
+																<tr>
+																		<td>Last Update: {{data.station.last_reading}}</td>
+																	</tr>
+															</tbody>
+														</table>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+					</div>		
+				</div>
+				<!--current state-->
+
+				<!--currentConditionMap-->
+				<div *ngIf="currentConditionMap" class="bg-light text-black shadow-sm mx-auto" style="width: 80%; height: 150px; border-radius: 21px 21px 0 0;">
+						<table >
+							<tbody>
+								<tr >
+									<td class="px-5"><img src="../../assets/svg/wi-fahrenheit.svg" width="80"></td>
+									<td class="px-5"><img src="../../assets/svg/wi-strong-wind.svg" width="80"></td>
+									<td class="px-5"><img src="../../assets/svg/wi-raindrops.svg" width="80"></td>
+									<td class="px-5"><img src="../../assets/svg/wi-humidity.svg" width="80"></td>
+									<td class="px-5"><img src="../../assets/svg/wi-barometer.svg" width="80"></td>
+									<td class="px-5"><img src="../../assets/svg/wi-fire.svg" width="80"></td>
+								</tr>
+								<tr >
+										<td *ngIf="currentConditionMap['Temperature']">{{currentConditionMap['Temperature'].reading}}</td>
+										<td *ngIf="currentConditionMap['Wind Speed']">{{currentConditionMap['Wind Speed'].reading}}</td>
+										<td *ngIf="currentConditionMap['Rain']">{{currentConditionMap['Rain'].reading}}</td>
+										<td *ngIf="currentConditionMap['Humidity']">{{currentConditionMap['Humidity'].reading}}</td>
+										<td *ngIf="currentConditionMap['Pressure']">{{currentConditionMap['Pressure'].reading}}</td>
+										<td *ngIf="currentConditionMap['Heat Index']">{{currentConditionMap['Heat Index'].reading}}</td>
+								</tr>
+								<tr>
+									<td *ngIf="currentConditionMap['Temperature']">{{currentConditionMap['Temperature'].channel_name}}</td>
+									<td *ngIf="currentConditionMap['Wind Speed']">{{currentConditionMap['Wind Speed'].channel_name}}</td>
+									<td *ngIf="currentConditionMap['Rain']">{{currentConditionMap['Rain'].channel_name}}</td>
+									<td *ngIf="currentConditionMap['Humidity']">{{currentConditionMap['Humidity'].channel_name}}</td>
+									<td *ngIf="currentConditionMap['Pressure']">{{currentConditionMap['Pressure'].channel_name}}</td>
+									<td *ngIf="currentConditionMap['Heat Index']">{{currentConditionMap['Heat Index'].channel_name}}</td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+				<!--currentConditionMap-->
+
+
+    </div>
+</div>    
+
+		  
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+	<div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+		<div class="my-3 p-3">
+			<h2 class="display-5">Rain & Growing Degree Daily</h2>
+			<p class="lead">Compaire rain and growing degree values</p>
+		</div>
+		<div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+				<canvas class="my-4 w-100" id="RainChart"></canvas>
+		</div>
+	</div>
+	<div class="bg-success mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+		<div class="my-3 py-3">
+			<h2 class="display-5">Heating Degree</h2>
+			<p class="lead">Compaire heating degree values</p>
+		</div>
+		<div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;">
+				<canvas class="my-4 w-100" id="HeatingChart"></canvas>
+		</div>
+	</div>
+</div>
+		  
